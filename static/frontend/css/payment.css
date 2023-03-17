@@ -1,0 +1,87 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Asap, Geneva, Tahoma, sans-serif;
+    margin: 10px 3px;
+    font-size: 17px;
+    padding: 5px;
+    font-weight: 600;
+}
+
+.container{
+    background-color: #f2f2f2;
+    border: 3px solid red;
+    border-radius: 4px;
+    padding: 5px 10px 15px 20px;
+}
+
+p{
+    font-size: 15px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+div{
+    margin: 10px;
+}
+
+.main-heading{
+    text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+select,textarea{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+input[type="submit"]{
+    width: 100%;
+    background-color: rgb(13, 163, 13);
+    color: honeydew;
+    font-size: 18px;
+    padding: 12px 20px;
+    margin: 10px 0px;
+    border-radius: 7px;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover{
+    background-color: red;
+}
+
+fieldset{
+    background-color: green;
+    border: 1px solid red;
+    margin: 10px;
+    font-size: 17px;
+}
+
+.Gender{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#visa{
+    width: 65px;
+}
+
+#rupay{
+    width: 95px;
+    height: 56px;
+}
+
+#mastercard{
+    width: 65px;
+}

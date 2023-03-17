@@ -1,0 +1,83 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                 <a href="/students/delete_student/{{ student_id }}">
+                    <button class="btn btn-danger">Delete Student</button>
+                </a>
+                <!-- general form elements -->
+                <div class="mt-2 card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    {% include "main_app/form_template.html" with messages=messages  form=form button_text="Update Student"%}
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+    </div>
+        <!-- Button trigger modal -->
+        <button id="trigger" style="display: none;" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#example">
+    </button>
+
+    <div class="modal fade modal-fullscreen" id="example" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div style="height: 300px;" class="modal-body">
+                    <div style="height: 300px;" id="img-box"></div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" >Close</button> -->
+                    <button type="button" id="subBtn" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+{% block custom_js %}
+
+<script>
+    const imgBox = document.getElementById("img-box");
+    const input = document.getElementById("id_picture");
+    const btn = document.getElementById("subBtn");
+
+    input.addEventListener('change', () => {
+        document.getElementById("trigger").click();
+        const img_data = input.files[0]
+        const url = URL.createObjectURL(img_data)
+        imgBox.innerHTML = `<img src="${url}" id="img">`;
+
+        var image = $('#img');
+
+        image.cropper({
+            aspectRatio: 150 / 150,
+
+        });
+        var cropper = image.data('cropper');
+        // Get the Cropper.js instance after initialized
+
+        btn.addEventListener('click', () => {
+            cropper.getCroppedCanvas().toBlob((Blob) => {
+                let file = new File([Blob], "img.jpg", { type: "image/jpeg", lastModified: new Date().getTime() });
+                let container = new DataTransfer();
+                container.items.add(file);
+                input.files = container.files;
+            });
+        });
+    });
+
+
+</script>
+
+
+{% endblock custom_js %}

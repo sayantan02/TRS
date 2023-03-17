@@ -1,0 +1,86 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block custom_css %}
+  <style>
+      .invalid{
+        font-style: italic;
+        font-weight: bold;
+        color: red;
+      }
+      .valid{
+        font-style: italic;
+        font-weight: bold;
+        color: green;
+      }
+  </style>
+{% endblock custom_css %}
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+
+                    {% include "main_app/form_template.html" with messages=messages  form=form button_text="Add Staff"%}
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Staffs</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Full Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for staff in staffs %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ staff.first_name }} {{ staff.last_name }}</td>
+                                    <td>{{ staff.username }}</td>
+                                    <td>
+                                        <a href="/students/delete_staff/{{ staff.id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this Staff ?, This Operation cannot be undone!')">Delete</a>
+                                    
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+{% block custom_js %}
+<script>
+    var errorList = document.querySelector(".errorlist");
+    errorList.removeChild("li");
+    var span = errorList.appendChild("span")
+    span.innerHTML = "Here is the Error";
+</script>
+{% endblock custom_js %}
